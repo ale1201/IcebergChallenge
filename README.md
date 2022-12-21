@@ -17,7 +17,7 @@ In this part, you should go to the specified folder and run the **manage.py** fi
 
 $ py manage.py runserver
 
-After running the server, you can go to the url *http://localhost:8000/hotels/{city}*, where {city} can be either 'medellin' or 'bogota' (for example: http://localhost:8000/hotels/medellin). It is going to take some time before you can see the json
+After running the server, you can go to the url *http://localhost:8000/hotels/{city}*, where {city} can be either 'medellin' or 'bogota' (for example: http://localhost:8000/hotels/medellin). It is going to take some time before you can see the json as an answer of this endpoint. It is important to note that it is going to be displayed the first 60 hotels of the web scraping from tripadvisor because of the long execution time that the endpoint has.
 
 
 
