@@ -18,7 +18,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('articles/<str:city>', views.testcase)
+    #path('', admin.site.urls),
+    path('hotels/<str:city>', views.testcase)
 
 ]
