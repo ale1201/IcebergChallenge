@@ -20,28 +20,20 @@ HEADERS = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 OPR/93.0.0.0',
     }
 
-def get_correct_url(pagination, city, counter):
-    if city == 'Medellin':
-        if pagination == True:
-            return f'{BASE_URL}/Hotels-g297478-oa{str(counter)}-Medellin_Antioquia_Department-Hotels.html'
-        return f'{BASE_URL}/Hotels-g297478-Medellin_Antioquia_Department-Hotels.html'
-    if city == 'Bogota':
-        if pagination == True:
-            return f'{BASE_URL}/Hotels-g294074-oa{str(counter)}-Bogota-Hotels.html'
-        return f'{BASE_URL}/Hotels-g294074-Bogota-Hotels.html'
+def get_correct_url(city, counter):
+    if city.lower() == 'medellin':
+        return f'{BASE_URL}/Hotels-g297478-oa{str(counter)}-Medellin_Antioquia_Department-Hotels.html'
+    if city.lower() == 'bogota':
+        return f'{BASE_URL}/Hotels-g294074-oa{str(counter)}-Bogota-Hotels.html'
 
 def testcase(request, city):
     result = {'data': []}
     counter = 0
-
-    while (counter <= 30):
-        if counter != 0:
-            r = requests.get(get_correct_url(True, city, counter), headers=HEADERS)
-        else:
-            r = requests.get(get_correct_url(False, city, counter), headers=HEADERS)
-
-        if counter != 0 and r.url == get_correct_url(False, city, counter):
-            break
+    url = 'https://www.tripadvisor.co/Search?q=medellin&ssrc=h'
+    r = requests.get(url, headers=HEADERS)
+    url_with_session_id = r.url
+    while (counter <= 40):
+        r = requests.get(get_correct_url(city, counter), headers=HEADERS)
 
         soup = BeautifulSoup(r.content, 'html.parser')
         list_hotels = soup.find_all('div', attrs={'class': 'prw_rup prw_meta_hsx_listing_name listing-title'})
